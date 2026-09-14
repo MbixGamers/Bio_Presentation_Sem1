@@ -1,0 +1,1096 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biomimicry Presentation | Butterfly Wing Inspired Technologies</title>
+  <style>
+    :root {
+      --bg: #07131f;
+      --bg-2: #0f2134;
+      --panel: rgba(13, 28, 42, 0.82);
+      --panel-strong: rgba(17, 35, 52, 0.94);
+      --line: rgba(255, 255, 255, 0.11);
+      --text: #edf6ff;
+      --muted: #b9cde6;
+      --primary: #7dd3fc;
+      --primary-strong: #4cc9f0;
+      --accent: #f7c5d8;
+      --green: #7ee7b0;
+      --gold: #f7c66a;
+      --shadow: 0 18px 30px rgba(3, 7, 18, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(247, 197, 216, 0.14), transparent 24%),
+        linear-gradient(135deg, var(--bg), var(--bg-2));
+      color: var(--text);
+      line-height: 1.72;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(7, 19, 31, 0.7);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.95rem;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover { color: var(--text); }
+
+    .nav-link.active {
+      color: var(--text);
+      text-shadow: 0 0 14px rgba(125, 211, 252, 0.4);
+    }
+
+    main { overflow: hidden; }
+
+    .page {
+      display: none;
+      padding: 52px 0;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    section {
+      padding: 52px 0;
+    }
+
+    .hero {
+      padding-top: 90px;
+      padding-bottom: 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 1.04;
+      letter-spacing: -0.07em;
+    }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .cta-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      border: 1px solid transparent;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      filter: brightness(1.05);
+      box-shadow: 0 16px 26px rgba(76, 201, 240, 0.18);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      color: #07131f;
+      box-shadow: 0 16px 28px rgba(76, 201, 240, 0.33);
+    }
+
+    .btn.secondary {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+    }
+
+    .btn.tertiary {
+      border-color: rgba(126, 231, 176, 0.38);
+      background: rgba(126, 231, 176, 0.08);
+      color: var(--text);
+    }
+
+    .project-subtitle {
+      margin: 0 0 18px;
+      font-size: 1.05rem;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      max-width: 70ch;
+    }
+
+    .team-names {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .team-names span {
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(14, 31, 46, 0.95), rgba(8, 17, 29, 0.94));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .visual {
+      aspect-ratio: 1 / 1.12;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 35% 25%, rgba(125, 211, 252, 0.35), transparent 18%),
+        linear-gradient(135deg, rgba(247, 197, 216, 0.11), rgba(125, 211, 252, 0.08), rgba(126, 231, 176, 0.08));
+    }
+
+    .wing {
+      position: relative;
+      width: 72%;
+      height: 72%;
+      filter: drop-shadow(0 24px 20px rgba(4, 10, 18, 0.32));
+    }
+
+    .wing::before, .wing::after {
+      content: "";
+      position: absolute;
+      inset: 12% 18% 12% 18%;
+      border-radius: 58% 42% 50% 50% / 52% 48% 52% 48%;
+      border: 1px solid rgba(255,255,255,0.22);
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.2), rgba(255,255,255,0) 30%),
+        linear-gradient(135deg, rgba(9, 15, 28, 0.8), rgba(21, 34, 52, 0.96));
+      transform: rotate(18deg);
+      box-shadow: inset 0 0 18px rgba(125, 211, 252, 0.34), inset 0 0 30px rgba(247, 197, 216, 0.1);
+    }
+
+    .wing::after {
+      inset: 18% 31% 18% 31%;
+      transform: rotate(-16deg);
+      border-radius: 50%;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(125,211,252,0.42) 0 5px,
+        rgba(255,255,255,0.06) 5px 11px,
+        rgba(247,197,216,0.2) 11px 18px
+      );
+    }
+
+    .small-pill {
+      position: absolute;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(8, 17, 29, 0.7);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+
+    .pill1 { top: 12%; left: 8%; }
+    .pill2 { right: 8%; bottom: 12%; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      letter-spacing: -0.05em;
+    }
+
+    .section-head p {
+      max-width: 560px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid-3, .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card,
+    .panel,
+    .slide,
+    .demo-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 24px;
+    }
+
+    .card h3,
+    .slide h3,
+    .demo-box h3 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+    }
+
+    .card p,
+    .card li,
+    .slide p,
+    .slide li,
+    .demo-box p,
+    .demo-box li {
+      color: var(--muted);
+    }
+
+    .card ul,
+    .slide ul,
+    .demo-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .slide-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .slide {
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(18, 35, 54, 0.92), rgba(11, 22, 34, 0.94));
+    }
+
+    .slide-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--green);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .stat {
+      background: rgba(17, 35, 52, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary);
+      font-size: 1.7rem;
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .demo-box {
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(14, 35, 52, 0.92), rgba(8, 19, 30, 0.9));
+    }
+
+    .model-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .model-list li {
+      background: rgba(17, 35, 52, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 15px 16px;
+      margin-bottom: 12px;
+      color: var(--muted);
+    }
+
+    .glb-frame {
+      min-height: 420px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(17, 35, 52, 0.9), rgba(12, 23, 39, 0.94));
+    }
+
+    .model-caption {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .code {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: rgba(8, 17, 29, 0.9);
+      border: 1px solid var(--line);
+      color: var(--primary);
+      font-family: "Consolas", monospace;
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+
+    .page-shell {
+      background: rgba(9, 18, 29, 0.35);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .page-header {
+      margin-bottom: 24px;
+    }
+
+    .page-header h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3.2vw, 2.9rem);
+      letter-spacing: -0.05em;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .content-grid.reverse {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .text-panel,
+    .visual-panel,
+    .model-box {
+      background: rgba(15, 29, 44, 0.8);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .text-panel h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+
+    .text-panel ul {
+      margin: 0 0 18px;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .text-panel li {
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    .visual-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      justify-content: space-between;
+    }
+
+    .visual-panel img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .solar-gallery {
+      position: relative;
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .solar-slide {
+      display: none;
+      width: 100%;
+      height: 430px;
+      position: relative;
+      background: rgba(7, 19, 31, 0.88);
+    }
+
+    .solar-slide.active {
+      display: block;
+    }
+
+    .solar-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(16, 31, 46, 0.9), rgba(9, 18, 29, 0.96));
+    }
+
+    .morpho-gallery {
+      position: relative;
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .morpho-slide {
+      display: none;
+      width: 100%;
+      height: 430px;
+      position: relative;
+      background: rgba(7, 19, 31, 0.88);
+    }
+
+    .morpho-slide.active {
+      display: block;
+    }
+
+    .morpho-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(16, 31, 46, 0.9), rgba(9, 18, 29, 0.96));
+    }
+
+    .fluid-gallery {
+      position: relative;
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .fluid-slide {
+      display: none;
+      width: 100%;
+      height: 430px;
+      position: relative;
+      background: rgba(7, 19, 31, 0.88);
+    }
+
+    .fluid-slide.active {
+      display: block;
+    }
+
+    .fluid-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(16, 31, 46, 0.9), rgba(9, 18, 29, 0.96));
+    }
+
+    .slideshow-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px 0;
+    }
+
+    .slideshow-btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .slideshow-btn:hover {
+      background: rgba(125, 211, 252, 0.12);
+      border-color: rgba(125, 211, 252, 0.4);
+    }
+
+    .slideshow-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .slideshow-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .slideshow-dots button.active {
+      background: var(--primary);
+      box-shadow: 0 0 12px rgba(125, 211, 252, 0.7);
+    }
+
+    .caption-box {
+      border-left: 3px solid var(--primary);
+      background: rgba(125, 211, 252, 0.06);
+      padding: 14px 16px;
+      border-radius: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .model-row {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .sketchfab-embed-wrapper {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(9, 18, 29, 0.9);
+    }
+
+    footer {
+      padding: 32px 0 56px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-3,
+      .slide-wrap,
+      .model-grid,
+      .stats,
+      .solar-gallery,
+      .cta-row {
+        grid-template-columns: 1fr;
+      }
+
+      .solar-gallery img {
+        height: 240px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 72px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">Biomimicry</div>
+        <div class="menu">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#solar" class="nav-link">Butterfly Wing-Inspired Solar Panels</a>
+          <a href="#optics" class="nav-link">Butterfly Wing-Inspired Optical Technologies</a>
+          <a href="#fluid" class="nav-link">Leaf Venation-Inspired Fluid Dynamics</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Biology Project / Biomimicry</div>
+          <h1><span class="highlight">Biomimicry</span> in Nature</h1>
+          <p class="project-subtitle">
+            Butterfly Wing-Inspired Solar Panels, Butterfly Wing-Inspired Optical & Photonic Technologies, and Leaf Venation-Inspired Fluid Dynamics
+          </p>
+          <p class="lead">
+            Nature has always been the most efficient engineer. Butterfly wings and plant leaf structures offer perfect examples of how biological systems solve difficult problems through optimized design. This website explores three remarkable examples of biomimicry: solar energy inspired by butterfly wings, optical technologies inspired by structural color, and fluid flow systems inspired by leaf venation.
+          </p>
+          <div class="team-names" aria-label="Project team members">
+            <span>Purnavo - J019</span>
+            <span>Kavish - J022</span>
+            <span>Abhinav - J020</span>
+            <span>Nathan - J021</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn primary nav-link" href="#solar">Page 1: Solar Panels</a>
+            <a class="btn secondary nav-link" href="#optics">Page 2: Optical Tech</a>
+            <a class="btn tertiary nav-link" href="#fluid">Page 3: Fluid Dynamics</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="visual">
+            <div class="wing"></div>
+            <div class="small-pill pill1">Sunlight</div>
+            <div class="small-pill pill2">Structural color</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solar" class="page">
+      <div class="container page-shell">
+        <div class="page-header">
+          <div>
+            <div class="eyebrow">Page 1</div>
+            <h2>Butterfly Wing-Inspired Solar Panels</h2>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="text-panel">
+            <h3>The Biological Inspiration</h3>
+            <ul>
+              <li>The Rose Butterfly (<em>Pachliopta aristolochiae</em>) requires maximum sunlight absorption to regulate its body temperature in cold environments.</li>
+              <li>Its black wing scales feature a highly disordered, nanostructured matrix of microscopic holes and ridges.</li>
+              <li>This 3D architecture traps light rays inside the wing structure, preventing reflection and absorbing nearly all incoming solar energy.</li>
+            </ul>
+
+            <h3>The Technological Application</h3>
+            <ul>
+              <li>Engineers replicate this nano-architecture by etching similar nanoholes into the surface of photovoltaic cells.</li>
+              <li>This biomimetic design increases the overall light absorption rate of solar panels by up to <strong>200%</strong>.</li>
+              <li>The resulting panels are drastically thinner, lighter, and generate significantly more electricity regardless of the sun's angle or heavy cloud cover.</li>
+            </ul>
+          </div>
+
+          <div class="visual-panel">
+            <div class="solar-gallery" aria-label="Solar panel inspiration slideshow">
+              <div class="solar-slide active">
+                <img src="./Solar Panel 1.jpg" alt="Solar panel design reference 1" />
+              </div>
+              <div class="solar-slide">
+                <img src="./Solar Panel 2.png" alt="Solar panel design reference 2" />
+              </div>
+              <div class="solar-slide">
+                <img src="./Solar Panel 3.jpg" alt="Solar panel design reference 3" />
+              </div>
+              <div class="solar-slide">
+                <img src="./Solar Panel 4.jpg" alt="Solar panel design reference 4" />
+              </div>
+              <div class="slideshow-controls">
+                <button class="slideshow-btn" type="button" aria-label="Previous slide" data-direction="prev">&#10094;</button>
+                <div class="slideshow-dots" aria-label="Slide indicators">
+                  <button class="active" type="button" aria-label="Show slide 1" data-index="0"></button>
+                  <button type="button" aria-label="Show slide 2" data-index="1"></button>
+                  <button type="button" aria-label="Show slide 3" data-index="2"></button>
+                  <button type="button" aria-label="Show slide 4" data-index="3"></button>
+                </div>
+                <button class="slideshow-btn" type="button" aria-label="Next slide" data-direction="next">&#10095;</button>
+              </div>
+            </div>
+            <div class="caption-box">
+              <strong>Why it matters:</strong> butterfly-like nanostructures help capture more sunlight and improve clean energy generation.
+            </div>
+          </div>
+        </div>
+
+        <div class="model-row">
+          <div class="model-box">
+            <h3>Local 3D butterfly model</h3>
+            <div class="glb-frame">
+              <model-viewer
+                src="./butterfly.glb"
+                alt="Butterfly wing 3D model"
+                auto-rotate
+                camera-controls
+                ar
+                shadow-intensity="1"
+                exposure="1.1"
+                style="width: 100%; height: 100%; min-height: 360px; display: block; background: transparent;"
+              ></model-viewer>
+            </div>
+          </div>
+
+          <div class="model-box">
+            <h3>External butterfly reference model</h3>
+            <div class="sketchfab-embed-wrapper">
+              <iframe title="Butterfly Rigged Animated PBR" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/5a6bc297064b43bba3c73ca96109e1d8/embed" style="display: block; width: 100%; min-height: 360px; border: 0;"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="optics" class="page">
+      <div class="container page-shell">
+        <div class="page-header">
+          <div>
+            <div class="eyebrow">Page 2</div>
+            <h2>Butterfly Wing-Inspired Optical Technologies</h2>
+          </div>
+        </div>
+
+        <div class="content-grid reverse">
+          <div class="visual-panel">
+            <div class="morpho-gallery" aria-label="Blue Morpho butterfly slideshow">
+              <div class="morpho-slide active">
+                <img src="./Blue Morpho 1.jpg" alt="Blue Morpho butterfly close-up 1" />
+              </div>
+              <div class="morpho-slide">
+                <img src="./Blue Morpho 2.jpg" alt="Blue Morpho butterfly close-up 2" />
+              </div>
+              <div class="morpho-slide">
+                <img src="./Blue Morpho 3.jpg" alt="Blue Morpho butterfly close-up 3" />
+              </div>
+              <div class="slideshow-controls">
+                <button class="slideshow-btn morpho-btn" type="button" aria-label="Previous morpho slide" data-direction="prev">&#10094;</button>
+                <div class="slideshow-dots" aria-label="Morpho slide indicators">
+                  <button class="active" type="button" aria-label="Show morpho slide 1" data-index="0"></button>
+                  <button type="button" aria-label="Show morpho slide 2" data-index="1"></button>
+                  <button type="button" aria-label="Show morpho slide 3" data-index="2"></button>
+                </div>
+                <button class="slideshow-btn morpho-btn" type="button" aria-label="Next morpho slide" data-direction="next">&#10095;</button>
+              </div>
+            </div>
+            <div class="caption-box">
+              <strong>Structural color:</strong> the Blue Morpho butterfly creates vivid blue light without using blue pigment.
+            </div>
+          </div>
+
+          <div class="text-panel">
+            <h3>The Biological Inspiration</h3>
+            <ul>
+              <li>The brilliant iridescence of the Blue Morpho butterfly relies entirely on "structural color" rather than chemical pigments.</li>
+              <li>Microscopic, tree-like ridges on the wing scales act as physical photonic crystals.</li>
+              <li>When light strikes these crystals, specific wavelengths experience constructive interference (amplifying the blue light) while other color wavelengths are canceled out.</li>
+            </ul>
+
+            <h3>The Technological Application</h3>
+            <ul>
+              <li><strong>Anti-counterfeiting:</strong> Secure documents and credit cards now use nanostructured holograms mimicking these wings, making them nearly impossible to digitally forge.</li>
+              <li><strong>Display Screens:</strong> Tech companies utilize these photonic structures to build ultra-low-power electronic displays that reflect ambient light to create color, eliminating the need for battery-draining backlights.</li>
+              <li><strong>Chemical Sensors:</strong> Photonic crystals change color instantly when exposed to different vapors, leading to highly sensitive wearable gas detectors for industrial safety.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fluid" class="page">
+      <div class="container page-shell">
+        <div class="page-header">
+          <div>
+            <div class="eyebrow">Page 3</div>
+            <h2>Leaf Venation-Inspired Fluid Dynamics</h2>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="text-panel">
+            <h3>The Biological Inspiration</h3>
+            <ul>
+              <li>Plant leaves must distribute water and nutrients to every cell using minimal pumping energy.</li>
+              <li>Their vein networks follow a fractal branching pattern governed by <strong>Murray's Law</strong>, where a main channel splits into smaller, mathematically optimized capillaries.</li>
+              <li>Interconnected loops within the network maintain perfect fluid pressure and prevent localized blockages from disrupting the entire system.</li>
+            </ul>
+
+            <h3>The Technological Application</h3>
+            <ul>
+              <li><strong>Microfluidic Chips:</strong> Lab-on-a-chip diagnostic tools use leaf-inspired micro-channels to rapidly mix blood and chemical reagents on a microscopic scale.</li>
+              <li><strong>Cooling Systems:</strong> High-performance computers and data centers use heat exchangers etched with leaf-vein patterns to dissipate heat faster while requiring less power to pump the liquid coolant.</li>
+              <li><strong>Fuel Cells:</strong> Hydrogen fuel cells mimic these networks in their flow fields to distribute gases evenly, boosting electrical output and extending battery lifespans.</li>
+            </ul>
+          </div>
+
+          <div class="visual-panel">
+            <div class="fluid-gallery" aria-label="Leaf venation slideshow">
+              <div class="fluid-slide active">
+                <img src="./Fluid 1.webp" alt="Leaf venation image 1" />
+              </div>
+              <div class="fluid-slide">
+                <img src="./Fluid 2.png" alt="Leaf venation image 2" />
+              </div>
+              <div class="fluid-slide">
+                <img src="./Fluid 3.jpg" alt="Leaf venation image 3" />
+              </div>
+              <div class="fluid-slide">
+                <img src="./Fluid 4.jpg" alt="Leaf venation image 4" />
+              </div>
+              <div class="fluid-slide">
+                <img src="./Fluid 5.jpg" alt="Leaf venation image 5" />
+              </div>
+              <div class="slideshow-controls">
+                <button class="slideshow-btn fluid-btn" type="button" aria-label="Previous fluid slide" data-direction="prev">&#10094;</button>
+                <div class="slideshow-dots" aria-label="Fluid slide indicators">
+                  <button class="active" type="button" aria-label="Show fluid slide 1" data-index="0"></button>
+                  <button type="button" aria-label="Show fluid slide 2" data-index="1"></button>
+                  <button type="button" aria-label="Show fluid slide 3" data-index="2"></button>
+                  <button type="button" aria-label="Show fluid slide 4" data-index="3"></button>
+                  <button type="button" aria-label="Show fluid slide 5" data-index="4"></button>
+                </div>
+                <button class="slideshow-btn fluid-btn" type="button" aria-label="Next fluid slide" data-direction="next">&#10095;</button>
+              </div>
+            </div>
+            <div class="caption-box">
+              <strong>Efficient flow:</strong> branching leaf veins distribute fluid efficiently while reducing pressure loss and energy consumption.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">Biomimicry Presentation • Nature-Inspired Technology • Sustainable Innovation</div>
+  </footer>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script>
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page');
+
+    const showPage = (targetId) => {
+      pages.forEach(page => {
+        page.classList.toggle('active', page.id === targetId);
+      });
+
+      navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${targetId}`;
+        link.classList.toggle('active', isActive);
+      });
+
+      const pageAnchor = document.getElementById(targetId);
+      if (pageAnchor) {
+        window.scrollTo({ top: pageAnchor.offsetTop - 80, behavior: 'smooth' });
+      }
+    };
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        const target = link.getAttribute('href');
+        if (!target || !target.startsWith('#')) return;
+        event.preventDefault();
+        showPage(target.substring(1));
+        history.replaceState(null, '', target);
+      });
+    });
+
+    const slides = Array.from(document.querySelectorAll('.solar-slide'));
+    const slideButtons = Array.from(document.querySelectorAll('.slideshow-dots button'));
+    const slideshowControls = document.querySelectorAll('.slideshow-btn');
+
+    let currentSlide = 0;
+
+    const renderSlide = (index) => {
+      currentSlide = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+      slideButtons.forEach((button, i) => button.classList.toggle('active', i === currentSlide));
+    };
+
+    slideshowControls.forEach((button) => {
+      button.addEventListener('click', () => {
+        const direction = button.dataset.direction === 'next' ? 1 : -1;
+        renderSlide(currentSlide + direction);
+      });
+    });
+
+    slideButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        renderSlide(Number(button.dataset.index));
+      });
+    });
+
+    setInterval(() => {
+      renderSlide(currentSlide + 1);
+    }, 5000);
+
+    const morphoSlides = Array.from(document.querySelectorAll('.morpho-slide'));
+    const morphoButtons = Array.from(document.querySelectorAll('.morpho-btn'));
+    const morphoDots = Array.from(document.querySelectorAll('.morpho-gallery .slideshow-dots button'));
+    let morphoCurrentSlide = 0;
+
+    const renderMorphoSlide = (index) => {
+      morphoCurrentSlide = (index + morphoSlides.length) % morphoSlides.length;
+
+      morphoSlides.forEach((slide, i) => slide.classList.toggle('active', i === morphoCurrentSlide));
+      morphoDots.forEach((button, i) => button.classList.toggle('active', i === morphoCurrentSlide));
+    };
+
+    morphoButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const direction = button.dataset.direction === 'next' ? 1 : -1;
+        renderMorphoSlide(morphoCurrentSlide + direction);
+      });
+    });
+
+    morphoDots.forEach((button) => {
+      button.addEventListener('click', () => {
+        renderMorphoSlide(Number(button.dataset.index));
+      });
+    });
+
+    setInterval(() => {
+      renderMorphoSlide(morphoCurrentSlide + 1);
+    }, 5000);
+
+    const fluidSlides = Array.from(document.querySelectorAll('.fluid-slide'));
+    const fluidButtons = Array.from(document.querySelectorAll('.fluid-btn'));
+    const fluidDots = Array.from(document.querySelectorAll('.fluid-gallery .slideshow-dots button'));
+    let fluidCurrentSlide = 0;
+
+    const renderFluidSlide = (index) => {
+      fluidCurrentSlide = (index + fluidSlides.length) % fluidSlides.length;
+
+      fluidSlides.forEach((slide, i) => slide.classList.toggle('active', i === fluidCurrentSlide));
+      fluidDots.forEach((button, i) => button.classList.toggle('active', i === fluidCurrentSlide));
+    };
+
+    fluidButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const direction = button.dataset.direction === 'next' ? 1 : -1;
+        renderFluidSlide(fluidCurrentSlide + direction);
+      });
+    });
+
+    fluidDots.forEach((button) => {
+      button.addEventListener('click', () => {
+        renderFluidSlide(Number(button.dataset.index));
+      });
+    });
+
+    setInterval(() => {
+      renderFluidSlide(fluidCurrentSlide + 1);
+    }, 5000);
+
+    const initialTarget = window.location.hash || '#home';
+    const initialId = initialTarget.replace('#', '');
+    if (document.getElementById(initialId)) {
+      showPage(initialId);
+    } else {
+      showPage('home');
+    }
+  </script>
+</body>
+</html>
