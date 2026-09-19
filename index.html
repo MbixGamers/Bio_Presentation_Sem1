@@ -1383,7 +1383,8 @@
             <h3>Leaf venation 3D model</h3>
             <div class="glb-frame">
               <model-viewer
-                src="./single_leaf.glb"
+                class="single-leaf-viewer"
+                data-src="./single_leaf.glb"
                 alt="Leaf venation 3D model"
                 auto-rotate
                 camera-controls
@@ -1516,7 +1517,41 @@
 
   <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
 
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.177.0/build/three.module.js"
+      }
+    }
+  </script>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script type="module">
+    import { GLTFExporter } from 'https://unpkg.com/three@0.177.0/examples/jsm/exporters/GLTFExporter.js';
+    import { GLTFLoader } from 'https://unpkg.com/three@0.177.0/examples/jsm/loaders/GLTFLoader.js';
+    import { MeshoptDecoder } from 'https://unpkg.com/three@0.177.0/examples/jsm/libs/meshopt_decoder.module.js';
+
+    const leafViewer = document.querySelector('.single-leaf-viewer');
+
+    if (leafViewer) {
+      const loader = new GLTFLoader();
+      const exporter = new GLTFExporter();
+      loader.setMeshoptDecoder(MeshoptDecoder);
+
+      MeshoptDecoder.ready.then(() => {
+        loader.load(leafViewer.dataset.src, (gltf) => {
+          exporter.parse(
+            gltf.scene,
+            (result) => {
+              const blob = new Blob([result], { type: 'model/gltf-binary' });
+              leafViewer.src = URL.createObjectURL(blob);
+            },
+            (error) => console.error('Unable to prepare the leaf model:', error),
+            { binary: true }
+          );
+        }, undefined, (error) => console.error('Unable to load the leaf model:', error));
+      });
+    }
+  </script>
   <script>
     const navLinks = document.querySelectorAll('.nav-link');
     const pages = document.querySelectorAll('.page');
